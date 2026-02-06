@@ -195,7 +195,7 @@ function build() {
   mkdir ${PIPY_DIR}/build 2>&1 > /dev/null || true
   rm -fr ${PIPY_DIR}/build/*
   cd ${PIPY_DIR}/build
-  $CMAKE -DPIPY_GUI=${PIPY_GUI} -DPIPY_CODEBASES=${PIPY_GUI} -DPIPY_STATIC=${PIPY_STATIC} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} $PIPY_DIR
+  $CMAKE -DPIPY_GUI=${PIPY_GUI} -DPIPY_CODEBASES=${PIPY_GUI} -DPIPY_SAMPLES=${PIPY_GUI} -DPIPY_STATIC=${PIPY_STATIC} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} $PIPY_DIR
   make -j${__NPROC}
   if [ $? -eq 0 ];then
     echo "Pipy has been built successfully and can be found in ${PIPY_DIR}/bin"
@@ -321,7 +321,7 @@ if $BUILD_ANDROID; then
     -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS_RELEASE=-g0 \
-    -DPIPY_LTO=OFF -DPIPY_GUI=OFF -DPIPY_CODEBASES=OFF \
+    -DPIPY_LTO=OFF -DPIPY_GUI=OFF -DPIPY_CODEBASES=OFF -PIPY_SAMPLES=OFF \
     -DZLIB_LIBRARY=/usr/lib/x86_64-linux-gnu/libz.a -DZLIB_INCLUDE_DIR=/usr/lib/x86_64-linux-gnu -GNinja ..
 
   ninja || exit $?
